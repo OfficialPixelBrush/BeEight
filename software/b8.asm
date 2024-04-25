@@ -7,30 +7,16 @@
 	#bits 8
 }
 
-immediate = 0b0
-address = 0b1
-
 #subruledef flag
 {
-    en => 0
-    z => 1
-    e => 2
-    s => 3
-	
-    d0 => 4
-    d1 => 5
-    d2 => 6
-    d3 => 7
-	
-    dis => 8
-    nz => 9
-    ne => 10
-    ns => 11
-	
-    nd0 => 12
-    nd1 => 13
-    nd2 => 14
-    nd3 => 15
+    0 => 0
+    1 => 1
+    z => 2
+    nz => 3
+    eq => 4
+    neq => 5
+    s => 6
+    ns => 7
 }
 
 #ruledef
