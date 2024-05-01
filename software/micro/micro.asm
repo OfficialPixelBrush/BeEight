@@ -30,6 +30,15 @@
 	inc => 0xD`4 @ 0x0`4
 }
 
+; Load from Immediate
+#align 4
+ldImm:
+om ip
+inc
+om ia
+inc
+nxt ; <- Interrupt opportunity?
+
 ; Load from Address
 #align 4
 ldAddr:
