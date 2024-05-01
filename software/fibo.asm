@@ -1,12 +1,20 @@
 #include "b8.asm"
-
-LD 55
-LD [0x666]
-ST [0x665]
-ADD 16
-ADD [0x665]
-NAND 24
-NAND [0x555]
-CMP NZ,0
-CMP 1
-CMP 0
+a = 0xFF0
+b = 0xFF1
+c = 0xFF2
+LD 1
+ST [a]
+LD 0
+ST [b]
+ST [c]
+loop:
+	LD [a]
+	ST [c]
+	ADD [b]
+	JPC end
+	ST [a]
+	LD [c]
+	ST [b]
+JP loop
+end:
+JP end

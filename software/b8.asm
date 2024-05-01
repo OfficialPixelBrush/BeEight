@@ -51,40 +51,29 @@
 	
 	; Address Nand
 	nand [{address: u12}] => 0xB @ address
-	
-	; cmp without value
-	cmp {f: flag} => {
-		assert(f == 0)
-		0x4 @ 0x0 @ 0x00
-	}
-	cmp {f: flag} => {
-		assert(f == 1)
-		0x4 @ 0x1 @ 0x00
-	}
-	
-	; Compare Is Condition
+
+	; Compare Two Byte
 	cmp {f: flag},{value: u8} => {
-		assert(f & 1 == 0)
 		0x4 @ f`4 @ value
 	}
-	; Compare Is Not Condition
-	cmp {f: flag},{value: u8} => {
-		assert(f & 1 == 1)
-		0xC @ f`4 @ value
+
+	; Compare One Byte
+	cmp {f: flag} => {
+		0xC @ f`4
 	}
 	
 	; Address Store Program Counter
 	stp [{address: u12}] => 0xD @ address
 	
 	; Immediate Jump
-	jp {address: u12} => 0x4 @ address
+	jp {address: u12} => 0x6 @ address
 	
 	; Address Jump
-	jp [{address: u12}] => 0xC @ address
+	jp [{address: u12}] => 0xE @ address
 	
 	; Immediate Conditional Jump
-	jpc {address: u12} => 0x6 @ address
+	jpc {address: u12} => 0x7 @ address
 	
 	; Address Conditional Jump
-	jpc [{address: u12}] => 0xE @ address
+	jpc [{address: u12}] => 0xF @ address
 }
