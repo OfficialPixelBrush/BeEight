@@ -49,11 +49,13 @@
 	; Address Add
 	add [{address: u12}] => 0xA @ address
 	
-	; Immediate Nand
-	nand {value: u8} => 0x30 @ value
+	; Immediate Nand (Shift Left)
+	SL => 0x30
+	; Immediate Nand (Shift Right)
+	SR => 0x31
 	
-	; Address Nand
-	nand [{address: u12}] => 0xB @ address
+	; Address Nand (NAND Operand)
+	nand {value: u8} => 0xB0 @ value
 
 	; Compare with Immediate
 	cmp {f: flag},{value: u8} => {

@@ -23,7 +23,7 @@
 	; 0x9
 	pbp => 0xA; 0xA primary buffer, preserve instruction
 	; 0xB 
-	; 0xC 
+	; 0xC
 	cf => 0xD ; 0xD update conditional flag
 	; 0xE increment pc
 	pcsu => 0xF ; 0xF upper nybble of PCS
@@ -73,13 +73,11 @@ osb ialu
 oalu ia
 nxt
 
-; Nand Immediate
+; Nand Immediate (SL/SR)
 nandImm:
 om ipb
 inc
-om isb
-inc
-osb ialu
+ialu
 oalu ia
 nxt
 
@@ -160,18 +158,15 @@ oalu ia
 opcs ipc
 nxt
 
-; Address Nand
+; Address Nand (NAND Operand)
 nandAddr:
 om ipb
 inc
 om isb
 inc
-opc ipcs
-osb ipc
 om isb
 osb ialu
 oalu ia
-opcs ipc
 nxt
 
 ; Compare A with ALU
