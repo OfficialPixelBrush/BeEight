@@ -20,11 +20,11 @@
     pc => 0x6 ; program counter
     pcs => 0x7 ; program counter storage
 	; 0x8 reset instruction counter
-	pbp => 0x9 ; 0x9 primary buffer, preserve instruction
-	; 0xA 
+	; 0x9
+	pbp => 0xA; 0xA primary buffer, preserve instruction
 	; 0xB 
 	; 0xC 
-	; 0xD update conditional flag
+	cf => 0xD ; 0xD update conditional flag
 	; 0xE increment pc
 	pcsu => 0xF ; 0xF upper nybble of PCS
 }
@@ -36,8 +36,6 @@
     o{ro: register} i{ri:register}=> ro`4 @ ri`4
 	o{ro: register} =>  ro`4 @ 0`4
 	i{ri: register} =>  0`4 @ ri`4
-	; update conditional flag
-	ucf => 0x0`4 @ 0xD`4
 	; increment pc
 	inc => 0x0`4 @ 0xE`4
 	; reset instruction counter
@@ -56,8 +54,12 @@ nxt ; <- Interrupt opportunity?
 stImm:
 om ipb
 inc
-oa im
+om isb
 inc
+opc ipcs
+osb ipc
+oa im
+opcs ipc
 nxt
 ; Kind of stupid, but it doesn't cost any extra hardware to add :p
 
@@ -67,7 +69,7 @@ om ipb
 inc
 om isb
 inc
-ialu
+osb ialu
 oalu ia
 nxt
 
@@ -77,20 +79,20 @@ om ipb
 inc
 om isb
 inc
-ialu
+osb ialu
 oalu ia
 nxt
 
-; Compare Two Byte
+; Compare A with Immediate
 cmpImm:
 om ipb
 inc
-ucf
+om icf
 inc
 nxt
 
 ; Store PC to Immediate???
-stpImm:
+spcImm:
 om ipb
 inc
 inc
@@ -128,13 +130,17 @@ om ia
 opcs ipc
 nxt
 
-; Store to Address
+; Store via Address
 stAddr:
 om ipb
 inc
 om isb
 inc
 opc ipcs
+osb ipc
+om ipbp
+inc
+om isb
 osb ipc
 oa im
 opcs ipc
@@ -149,7 +155,7 @@ inc
 opc ipcs
 osb ipc
 om isb
-ialu
+osb ialu
 oalu ia
 opcs ipc
 nxt
@@ -163,20 +169,20 @@ inc
 opc ipcs
 osb ipc
 om isb
-ialu
+osb ialu
 oalu ia
 opcs ipc
 nxt
 
-; Compare One Byte
+; Compare A with ALU
 cmpAddr:
 om ipb
-ucf
+oalu icf
 inc
 nxt
 
 ; Store Program Counter
-stpAddr:
+spcAddr:
 om ipb
 inc
 om isb

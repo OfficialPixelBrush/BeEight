@@ -12,12 +12,12 @@
 {
 	0 => 0
 	1 => 1
-	z => 2
-	nz => 3
-	eq => 4
-	neq => 5
-	s => 6
-	ns => 7
+	eq => 2
+	neq => 3
+	ls => 4
+	greq => 5
+	gr => 6
+	lseq => 7
 
 	d0 => 8
 	nd0 => 9
@@ -37,8 +37,11 @@
 	; Address Load
 	ld [{address: u12}] => 0x8 @ address
 	
+	; Immediate Store
+	st [{address: u12}] => 0x1 @ address
+
 	; Address Store
-	st [{address: u12}] => 0x9 @ address
+	st [[{address: u12}]] => 0x9 @ address
 	
 	; Immediate Add
 	add {value: u8} => 0x20 @ value
@@ -52,18 +55,18 @@
 	; Address Nand
 	nand [{address: u12}] => 0xB @ address
 
-	; Compare Two Byte
+	; Compare with Immediate
 	cmp {f: flag},{value: u8} => {
 		0x4 @ f`4 @ value
 	}
 
-	; Compare One Byte
+	; Compare with ALU
 	cmp {f: flag} => {
 		0xC @ f`4
 	}
 	
 	; Address Store Program Counter
-	stp [{address: u12}] => 0xD @ address
+	spc [{address: u12}] => 0xD @ address
 	
 	; Immediate Jump
 	jp {address: u12} => 0x6 @ address
