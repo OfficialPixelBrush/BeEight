@@ -54,14 +54,8 @@ nxt ; <- Interrupt opportunity?
 stImm:
 om ipb
 inc
-om isb
-inc
-opc ipcs
-osb ipc
-oa im
-opcs ipc
 nxt
-; Kind of stupid, but it doesn't cost any extra hardware to add :p
+; Too stupid for me to like. Fuck you.
 
 ; Add Immediate
 addImm:
@@ -92,7 +86,6 @@ nxt
 ; Store PC to Immediate???
 spcImm:
 om ipb
-inc
 inc
 nxt
 ; Impossible.
@@ -128,17 +121,13 @@ om ia
 opcs ipc
 nxt
 
-; Store via Address
+; Store to Address
 stAddr:
 om ipb
 inc
 om isb
 inc
 opc ipcs
-osb ipc
-om ipbp
-inc
-om isb
 osb ipc
 oa im
 opcs ipc

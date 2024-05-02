@@ -37,11 +37,8 @@
 	; Address Load
 	ld [{address: u12}] => 0x8 @ address
 	
-	; Immediate Store
-	st [{address: u12}] => 0x1 @ address
-
 	; Address Store
-	st [[{address: u12}]] => 0x9 @ address
+	st [{address: u12}] => 0x9 @ address
 	
 	; Immediate Add
 	add {value: u8} => 0x20 @ value
