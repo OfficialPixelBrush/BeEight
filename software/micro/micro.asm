@@ -20,13 +20,13 @@
     pc => 0x6 ; program counter
     pcs => 0x7 ; program counter storage
 	; 0x8 reset instruction counter
-	; 0x9
+	; 0x9 output upper nybble of pcs into memory
 	pbp => 0xA; 0xA primary buffer, preserve instruction
 	; 0xB 
 	; 0xC
 	cf => 0xD ; 0xD update conditional flag
 	; 0xE increment pc
-	pcsu => 0xF ; 0xF upper nybble of PCS
+	; 0xF 
 }
 
 #ruledef
@@ -40,6 +40,8 @@
 	inc => 0x0`4 @ 0xE`4
 	; reset instruction counter
 	nxt => 0x8`4 @ 0x0`4
+	; output upper nybble of pcs into memory
+	pcsu => 0x7`4 @ 0x9`4
 }
 
 ; Load from Immediate
@@ -173,9 +175,9 @@ om isb
 inc
 opc ipcs
 osb ipc
-opcs im
+pcsu
 inc
-opcsu im
+opcs im
 opcs ipc
 nxt
 
@@ -184,8 +186,7 @@ jpAddr:
 om ipb
 inc
 om isb
-opc ipcs
-opb ipc
+osb ipc
 om ipbp
 inc
 om isb
@@ -197,8 +198,7 @@ jpcAddr:
 om ipb
 inc
 om isb
-opc ipcs
-opb ipc
+osb ipc
 om ipbp
 inc
 om isb
