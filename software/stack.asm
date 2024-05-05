@@ -4,8 +4,7 @@ LD [num]
 ADD 1
 JPC freeze
 ST [num]
-CMP 0
-JPC [0xFFE]
+JP [0xFFE]
 
 freeze:
 JP freeze

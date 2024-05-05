@@ -52,12 +52,17 @@ om ia
 inc
 nxt ; <- Interrupt opportunity?
 
-; Store to Immediate???
+; Store to Address
 stImm:
 om ipb
 inc
+om isb
+inc
+opc ipcs
+osb ipc
+oa im
+opcs ipc
 nxt
-; Too stupid for me to like. Fuck you.
 
 ; Add Immediate
 addImm:
@@ -85,14 +90,19 @@ om icf
 inc
 nxt
 
-; Store PC to Immediate???
+; Store Program Counter
 spcImm:
 om ipb
 inc
+om isb
+inc
+opc ipcs
+osb ipc
+pcsu
+inc
+opcs im
+opcs ipc
 nxt
-; Impossible.
-; Won't even attempt to add this.
-; Why would anyone want this?
 
 ; Jump to immediate
 jpImm:
@@ -123,13 +133,17 @@ om ia
 opcs ipc
 nxt
 
-; Store to Address
+; Store via Address
 stAddr:
 om ipb
 inc
 om isb
 inc
 opc ipcs
+osb ipc
+om ipbp
+inc
+om isb
 osb ipc
 oa im
 opcs ipc
@@ -167,13 +181,17 @@ oalu icf
 inc
 nxt
 
-; Store Program Counter
+; Store Program Counter via Address
 spcAddr:
 om ipb
 inc
 om isb
 inc
 opc ipcs
+osb ipc
+om ipbp
+inc
+om isb
 osb ipc
 pcsu
 inc

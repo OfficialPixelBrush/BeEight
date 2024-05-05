@@ -38,7 +38,10 @@
 	ld [{address: u12}] => 0x8 @ address
 	
 	; Address Store
-	st [{address: u12}] => 0x9 @ address
+	st [{address: u12}] => 0x1 @ address
+	
+	; Address via Store
+	st [[{address: u12}]] => 0x9 @ address
 	
 	; Immediate Add
 	add {value: u8} => 0x20 @ value
@@ -65,7 +68,10 @@
 	}
 	
 	; Address Store Program Counter
-	spc [{address: u12}] => 0xD @ address
+	spc [{address: u12}] => 0x5 @ address
+	
+	; Address Store Program Counter via Address
+	spc [[{address: u12}]] => 0xD @ address
 	
 	; Immediate Jump
 	jp {address: u12} => 0x6 @ address
