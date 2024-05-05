@@ -23,6 +23,7 @@ byte conditionalFlag = 0;
 
 // Old Regs
 byte oldA = 0;
+byte oldALU = 0;
 word oldPC = 0;
 byte oldConditionalFlag = 0;
 
@@ -44,6 +45,8 @@ word twoBytesToWord(byte first, byte second) {
 	value |= second;
 	return value;
 }
+
+// TODO: Add Microcode Handling
 
 int main(int argc, char *argv[]) {
 	FILE *fptr;
