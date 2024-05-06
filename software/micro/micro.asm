@@ -23,7 +23,7 @@
 	; 0x9 output upper nybble of pcs into memory
 	pbp => 0xA; 0xA primary buffer, preserve instruction
 	; 0xB 
-	; 0xC
+	idx => 0xC ; 0xC index register
 	cf => 0xD ; 0xD update conditional flag
 	; 0xE increment pc
 	; 0xF 
@@ -38,8 +38,10 @@
 	i{ri: register} =>  0`4 @ ri`4
 	; increment pc
 	inc => 0x0`4 @ 0xE`4
+	; increment idx
+	inx => 0xC`4 @ 0xC`4
 	; reset instruction counter
-	nxt => 0x8`4 @ 0x0`4
+	nxt => 0x8`4 @ 0x8`4
 	; output upper nybble of pcs into memory
 	pcsu => 0x7`4 @ 0x9`4
 }
