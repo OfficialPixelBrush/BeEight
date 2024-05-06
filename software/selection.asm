@@ -12,70 +12,26 @@ sorted:
 #d8 0xFF
 temp:
 #d8 0xFF
-position:
+index:
+#d8 0xFF
+i:
+#d8 0x02
+j:
 #d8 0x00
 
-loop:
-compare:
-LD [data+1] ; load array+1
-ST [checkValue+1]
-compare2:
-LD [data]
-checkValue:
-CMP GR,0
-JPC swap
-returnFromSwap:
-; move pointer to next position
-LD [compare+1]
-ST [compare2+1]
-ST [d2+1]
-ST [d4+1]
-ADD 1
-ST [compare+1]
-ST [d1+1]
-ST [d3+1]
-LD [position]
-ADD 1
-ST [position]
-CMP GREQ,size
-JPC restartLoop
-JP loop
+loopI:
+    LD [i]
+    CMP GREQ,size
+    JPC finished
+    ST [index]
+    loopJ:
+        LD [i]
+        ADD 1
+        ST [j]
+        CMP GREQ,size
+        JPC loopJfinish
+        
 
-swap:
-d1:
-LD [data+1]
-ST [temp]
-d2:
-LD [data]
-d3:
-ST [data+1]
-LD [temp]
-d4:
-ST [data]
-LD [sorted]
-CMP 0
-ADD 1
-ST [sorted]
-JP returnFromSwap
-
-restartLoop:
-; check if sorted
-LD [sorted]
-CMP EQ,0
-JPC finished
-; reset position pointer to start of array
-LD 0
-ST [position]
-ST [sorted]
-LD data
-ST [compare2+1]
-ST [d2+1]
-ST [d4+1]
-ADD 1
-ST [compare+1]
-ST [d1+1]
-ST [d3+1]
-JP loop
 
 finished:
-JP finished
+    JP finished
