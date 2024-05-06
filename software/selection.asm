@@ -1,6 +1,6 @@
 #include "b8.asm"
 
-JP loop
+JP loopI
 
 size = 31
 
@@ -30,7 +30,27 @@ loopI:
         ST [j]
         CMP GREQ,size
         JPC loopJfinish
-        
+        LD [j]
+        ST [compare1+1]
+        LD [index]
+        ST [compare2+1]
+        compare1:
+        LD [data]
+        compare2:
+        CMP GREQ,0xFF
+        JPC fail
+            LD [j]
+            ST [index]
+        fail:
+        LD [j]
+        ADD 1
+        ST [j]
+        JP loopJ
+    loopJfinish:
+    LD [i]
+    ADD 1
+    ST [i]
+    JP loopI
 
 
 finished:
