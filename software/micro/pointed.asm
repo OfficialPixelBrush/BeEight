@@ -25,7 +25,7 @@ inc
 om isb
 inc
 opc ipcs
-osb ipc
+oidx ipc
 om isb
 osb ialu
 oalu ia

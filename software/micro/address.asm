@@ -10,7 +10,7 @@ om ia
 opcs ipc
 nxt
 
-; Store via Address
+; Store to Address
 #align 128
 om ipb
 inc
@@ -47,11 +47,22 @@ osb ialu
 oalu ia
 nxt
 
-; Compare A with ALU
-#align 128
+; Store IDX
+#align 128 
 om ipb
-oalu icf
 inc
+om isb
+inc
+opc ipcs
+osb ipc
+om ipbp
+inc
+om isb
+osb ipc
+dbu
+inc
+opcs im
+opcs ipc
 nxt
 
 ; Store Program Counter via Address
@@ -66,7 +77,7 @@ om ipbp
 inc
 om isb
 osb ipc
-pcsu
+dbu
 inc
 opcs im
 opcs ipc

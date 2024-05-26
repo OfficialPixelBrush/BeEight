@@ -54,7 +54,7 @@
 	}
 
 	; Load into Index
-	ldx {address: u12} => 0x5 @ address
+	ldx [{address: u12}] => 0x5 @ address
 	
 	; Immediate Jump
 	jp {address: u12} => 0x6 @ address
@@ -106,7 +106,7 @@
 		0xB`4 @ address
 	}
 	
-	; Store into Index
+	; Store Index
 	stx [{address: u12}] => {
 		0xC @ address
 	}

@@ -45,7 +45,13 @@ om ipb
 inc
 om isb
 inc
+opc ipcs
+osb ipc
+om ipbp
+inc
+om sb
 osb iidx
+opcs ipc
 nxt
 
 ; Jump to immediate
