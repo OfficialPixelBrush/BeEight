@@ -53,7 +53,7 @@ LD [temp]
 d4:
 ST [data]
 LD [sorted]
-CMP 0
+CMP 0,0
 ADD 1
 ST [sorted]
 JP returnFromSwap

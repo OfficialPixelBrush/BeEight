@@ -22,29 +22,17 @@
 
 #ruledef
 {
+	; --- IMMEDIATE ---
 	; Immediate Load
 	ld {value: u8} => 0x00 @ value
 
-	; Pointed Load
-	ld [idx] => 0x01
-	
-	; Address Load
-	ld [{address: u12}] => 0x8 @ address
-	
-	; Pointed Store
-	st [idx] => 0x11
-	
-	; Address Store
-	st [{address: u12}] => 0x9 @ address
+	; Increment IDX
+	inx => {
+		0x10
+	}
 	
 	; Immediate Add
 	add {value: u8} => 0x20 @ value
-	
-	; Pointed Add
-	add [idx] => 0x21
-	
-	; Address Add
-	add [{address: u12}] => 0xA @ address
 	
 	; Immediate Bitop (Shift Left)
 	SL => {
@@ -59,20 +47,43 @@
 	nand {value: u8} => {
 		0x3`4 @ 0`1 @ 2`3 @ value
 	}
-	
-	; Pointed Nand
-	nand => {
-		0x3`4 @ 1`1 @ 2`3
-	}
-	
-	; Address Nand
-	nand [{address: u12}] => {
-		0xB`4 @ address
-	}
 
 	; Compare with Immediate
 	cmp {f: flag},{value: u8} => {
 		0x4 @ 0`1 @ f`3 @ value
+	}
+
+	; Load into Index
+	ldx {address: u12} => 0x5 @ address
+	
+	; Immediate Jump
+	jp {address: u12} => 0x6 @ address
+	
+	; Immediate Conditional Jump
+	jpc {address: u12} => 0x7 @ address
+
+	; --- POINTED ---
+	; Pointed Load
+	ld [idx] => 0x01
+	
+	; Pointed Store
+	st [idx] => 0x11
+	
+	; Pointed Add
+	add [idx] => 0x21
+	
+	; Pointed Bitop (Shift Left)
+	SL => {
+		0x3`4 @ 1`1 @ 0`3
+	}
+	; Pointed Bitop (Shift Right)
+	SR => {
+		0x3`4 @ 1`1 @ 1`3
+	}
+	
+	; Pointed Nand
+	nand => {
+		0x3`4 @ 1`1 @ 2`3
 	}
 
 	; Compare with Pointed
@@ -80,30 +91,31 @@
 		0x4 @ 1`1 @ f`3
 	}
 	
-	; Compare with Pointed(?)
-	cmp {f: flag} => {
-		0x4 @ 1`1 @ f`3
+	; --- ADDRESS ---
+	; Address Load
+	ld [{address: u12}] => 0x8 @ address
+	
+	; Address Store
+	st [{address: u12}] => 0x9 @ address
+	
+	; Address Add
+	add [{address: u12}] => 0xA @ address
+	
+	; Address Nand
+	nand [{address: u12}] => {
+		0xB`4 @ address
 	}
-
-	; Increment IDX
-	inx => {
-		0xC0
+	
+	; Store into Index
+	stx [{address: u12}] => {
+		0xC @ address
 	}
-
-	; Load IDX
-	ldx {address: u12} => 0x50
 	
 	; Address Store Program Counter
 	spc [{address: u12}] => 0xD @ address
 	
-	; Immediate Jump
-	jp {address: u12} => 0x6 @ address
-	
 	; Address Jump
 	jp [{address: u12}] => 0xE @ address
-	
-	; Immediate Conditional Jump
-	jpc {address: u12} => 0x7 @ address
 	
 	; Address Conditional Jump
 	jpc [{address: u12}] => 0xF @ address
