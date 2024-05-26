@@ -20,7 +20,7 @@
     pc => 0x6 ; program counter
     pcs => 0x7 ; program counter storage
 	; 0x8 reset instruction counter
-	; 0x9 output upper nybble of internal databus into memory
+	um => 0x9 ; 0x9 output upper nybble of internal databus into memory
 	pbp => 0xA; 0xA primary buffer, preserve instruction
 	; 0xB 
 	idx => 0xC ; 0xC index register
@@ -36,14 +36,13 @@
     o{ro: register} i{ri:register}=> ro`4 @ ri`4
 	o{ro: register} =>  ro`4 @ 0`4
 	i{ri: register} =>  0`4 @ ri`4
-	; increment pc
-	inc => 0x0`4 @ 0xE`4
-	; increment idx
-	inx => 0xC`4 @ 0xC`4
+	
 	; reset instruction counter
 	nxt => 0x8`4 @ 0x8`4
-	; output upper nybble of pcs into memory
-	dbu => 0x7`4 @ 0x9`4
+	; increment idx
+	inx => 0xC`4 @ 0xC`4
+	; increment pc
+	inc => 0x0`4 @ 0xE`4
 }
 
 #include "immediate.asm"

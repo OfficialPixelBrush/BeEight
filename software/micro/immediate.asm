@@ -49,12 +49,12 @@ opc ipcs
 osb ipc
 om ipbp
 inc
-om sb
+om isb
 osb iidx
 opcs ipc
 nxt
 
-; Jump to immediate
+; Jump to Address
 #align 128
 om ipb
 inc
@@ -62,7 +62,7 @@ om isb
 osb ipc
 nxt
 
-; Jump to immediate Conditional
+; Jump to Address Conditional
 #align 128
 om ipb
 inc

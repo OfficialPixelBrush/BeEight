@@ -64,13 +64,13 @@
 
 	; --- POINTED ---
 	; Pointed Load
-	ld [idx] => 0x01
+	ld [idx] => 0x08
 	
 	; Pointed Store
-	st [idx] => 0x11
+	st [idx] => 0x18
 	
 	; Pointed Add
-	add [idx] => 0x21
+	add [idx] => 0x28
 	
 	; Pointed Bitop (Shift Left)
 	SL => {

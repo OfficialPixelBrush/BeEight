@@ -47,7 +47,7 @@ osb ialu
 oalu ia
 nxt
 
-; Store IDX
+; Store Index
 #align 128 
 om ipb
 inc
@@ -59,13 +59,13 @@ om ipbp
 inc
 om isb
 osb ipc
-dbu
+oidx ium
 inc
-opcs im
+oidx im
 opcs ipc
 nxt
 
-; Store Program Counter via Address
+; Store Program Counter to Address
 #align 128
 om ipb
 inc
@@ -77,7 +77,7 @@ om ipbp
 inc
 om isb
 osb ipc
-dbu
+opcs ium
 inc
 opcs im
 opcs ipc

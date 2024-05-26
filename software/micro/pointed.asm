@@ -18,11 +18,9 @@ oa im
 opcs ipc
 nxt
 
-; Index Add
+; Add via Index
 #align 128
 om ipb
-inc
-om isb
 inc
 opc ipcs
 oidx ipc
@@ -32,25 +30,29 @@ oalu ia
 opcs ipc
 nxt
 
-; Index Nand (NAND Operand)
+; Bitop via Index (NAND Operand)
 #align 128
 om ipb
 inc
-om isb
-inc
+opc ipcs
+oidx ipc
 om isb
 osb ialu
 oalu ia
+opcs ipc
 nxt
 
-; Compare A with Index
+; Compare A via Index
 #align 128
 om ipb
-oalu icf
 inc
+opc ipcs
+oidx ipc
+om icf
+opcs ipc
 nxt
 
-; Store Program Counter (Imm)
+; Load into Index
 #align 128
 om ipb
 inc
@@ -58,13 +60,14 @@ om isb
 inc
 opc ipcs
 osb ipc
-pcsu
+om ipbp
 inc
-opcs im
+om isb
+osb iidx
 opcs ipc
 nxt
 
-; Jump to immediate (Imm)
+; Jump to immediate
 #align 128
 om ipb
 inc
@@ -72,7 +75,7 @@ om isb
 osb ipc
 nxt
 
-; Jump to immediate Conditional (Imm)
+; Jump to immediate Conditional
 #align 128
 om ipb
 inc
